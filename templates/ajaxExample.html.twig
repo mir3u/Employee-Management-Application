@@ -1,0 +1,47 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title> ajax</title>
+</head>
+<body>
+ <a href="#" id="load"> load ajax </a>
+ <table class = "table">
+     <tbody id = "show"></tbody>
+ </table>
+
+ <button id="getNumber"> GetNumber </button>
+<script>
+    $(document).ready(function(){
+        $("#load").on("click", function(event){
+            $.ajax({
+                url:        '/ajax',
+                type:       'POST',
+                dataType:   'json',
+                async:      true,
+
+                success: function(data, status) {
+                    var e = $('<tr><td id = "name"></td></tr>');
+                    $('#show').html('');
+                    $('#show').append(e);
+
+                    for(i = 0; i < data.length; i++) {
+                        a= data[i];
+                        var e = $('<tr><td id = "name"></td></tr>');
+
+                        $('#name', e).html(a['array']);
+                        $('#show').append(e);
+
+
+
+
+                    }
+                    },
+                error : function(xhr, textStatus, errorThrown) {
+                    alert('Ajax request failed.');
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

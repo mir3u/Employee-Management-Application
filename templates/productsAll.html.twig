@@ -1,0 +1,38 @@
+{% extends "base1.html.twig" %}
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+    <div class="container-fluid main ">
+    <h5> Hi {{ user }} !</h5>
+    <div class="col">
+    <div class="row">
+    {% for product in products %}
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card">
+                <img class="card-img-top" src="{{ asset(product.img) }}"/></div>
+            <div class="card-body">
+                <h4 class="btn btn-danger btn-block"><a href="/product/view/{{ product.id }}" title="View Product" >View Product </a> </h4>
+                <p class="card-text"></p>
+                <div class="row">
+                    <div class="col">
+                        <p class="btn btn-danger btn-block"><a href="/cart/add/{{ product.id }}">{{ product.price }}</p></a>
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="col">
+
+{#                    {{ form(form) }}#}
+            </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}

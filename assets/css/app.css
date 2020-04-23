@@ -1,0 +1,87 @@
+.nav{
+    padding-bottom: 10px;
+    margin: 5px;
+
+}
+#banner{
+    padding-top: 10px;
+    align-content: center;
+}
+.campanii{
+
+    margin: 100px;
+    /*background-color: gainsboro;*/
+}
+.namestore{
+    text-align: center;
+}
+.elem1{
+    background-color: #cdd6dc;
+    margin-left: 10%;
+    margin-right: 10%;
+
+
+}
+.gallery-wrap .img-big-wrap img {
+    height: 250px;
+    width: auto;
+    display: inline-block;
+    cursor: zoom-in;
+}
+/*.main{*/
+/*    margin-top: 100px;*/
+/*}*/
+.param {
+    margin-bottom: 7px;
+    line-height: 1.4;
+}
+.param-inline dt {
+    display: inline-block;
+}
+.param dt {
+    margin: 0;
+    margin-right: 7px;
+    font-weight: 600;
+}
+.param-inline dd {
+    vertical-align: baseline;
+    display: inline-block;
+}
+
+.param dd {
+    margin: 0;
+    vertical-align: baseline;
+}
+
+var {
+    font-style: normal;
+}
+
+.media img {
+    margin-right: 1rem;
+}
+.img-sm {
+    width: 90px;
+    max-height: 75px;
+    object-fit: cover;
+}
+
+.bill{
+
+    /*padding-right: 4%;*/
+    align-content: center;
+    padding: 1.5%;
+    padding-left: 4%;
+    /*width: 50%;*/
+    height: 10%;
+    margin: 2%;
+    border: #c5cbc6 solid 1px;
+    background-color: #e1f5ff;
+    display: inline-block;
+    /*box-shadow: 10px 10px 5px grey;*/
+}
+
+.billTable{
+    table-layout: fixed;
+    width: 80%;
+}

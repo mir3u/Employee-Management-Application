@@ -1,0 +1,46 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+
+    <div class="container-fluid">
+        {#        <div class="col-md-6"> <p> </p></div>#}
+        <div class="container">
+            {#            <div class="col-md-12">#}
+            {% if bills %}
+                {#                <ul>#}
+                {% for bill in bills %}
+                    <div class="container bill">
+                        <table class="billTable">
+                            <th>Bill No.</th>
+                            <th style="margin: 10%;">Value</th>
+                            <th>Deadline</th>
+                            <tr>
+                                <td>{{ bill.id }}</td>
+                                <td style="margin: 10%;">{{ bill.value }} </td>
+                                <td>{{ bill.deadline|date('d-m-Y') }}</td>
+
+                                {% if bill.payment == 0 %}
+                                    <td><a href="{{ path("payBill", {id: bill.id}) }}"><button class="btn btn-warning">Pay Bill</button></a></td>
+                                {% endif %}
+
+                                <td><a href="{{ path("editBill", {id: bill.id}) }}"><button class="btn btn-primary">Edit Bill</button></a> </td>
+
+                                <td><a href="{{ path("deleteBill", {id: bill.id}) }}"><button class="btn btn-danger">Delete Bill</button></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                {#                </ul>#}
+                <a href="{{ path("newBill") }}"><button class="btn btn-primary">New Bill</button></a>
+            {% else %}
+                <h4>You have no bill! <a href="{{ path("newBill") }}"><button class="btn btn-primary">New Bill</button></a> </h4>
+            {% endif %}
+            {#                </div>#}
+        </div>
+    </div>
+    </div>
+{% endblock %}

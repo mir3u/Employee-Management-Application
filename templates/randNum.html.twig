@@ -1,0 +1,29 @@
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title> ajax</title>
+</head>
+<body>
+
+<button id="getNumber"> GetNumber </button>
+<div class="show" id="show"> </div>
+<script>
+    $(document).ready(function(){
+        $("#getNumber").on("click", function(event){
+            $.ajax({
+                url:        '/randNum',
+                type:       'POST',
+                dataType:   'json',
+                async:      true,
+                success: function(data, status) {
+                   // $a = JSON.parse(data);
+                    console.log(data);
+                    $('#show').html(data["array"]);
+                 },
+                error : function(xhr, textStatus, errorThrown) {
+                alert('Ajax request failed.');
+            }
+        });
+    });
+    });
+</script>
