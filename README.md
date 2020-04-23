@@ -1,4 +1,4 @@
-**REQUIREMENTS and basic commands**
+# **REQUIREMENTS and basic commands**
 
 
 For WINDOWS:
@@ -30,9 +30,11 @@ After this run the following commands:
 
 composer install
 
-php bin/console doctrine:schema:update --force --dump-sql
+php bin/console doctrine:schema:update --force --dump-sql (!!!!! ALWAYS RUN THIS COMMAND AFTER CREATING OR CHANGING AN ENTITY)
 
 php bin/console cache:warmup
+
+# !!!!!!Always run this commands after pulling code with git pull origin <branch>!!!!!!!
 
 To start the server: symfony server:start
 If you change css change the assets/css/app.css file and be sure to run yarn encore dev --watch (continuous compiling) or yarn encore dev (single compiling)
