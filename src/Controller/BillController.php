@@ -43,9 +43,17 @@ class BillController extends AbstractController
     }
 
     public function listBills(Request $request){
+        /** @var Bill[] $bills */
         $bills = $this->getDoctrine()
             ->getRepository(Bill::class)
             ->findAll();
+
+
+        usort($bills,function($first,$second){
+            return $first->getPayment() < $second->getPayment();
+        });
+
+//        die(var_dump($bills));
 
         return $this->render('listBills.html.twig', ['bills' => $bills]);
 
@@ -92,7 +100,7 @@ class BillController extends AbstractController
             ->findOneBy(['id' => $id]);
         $bill->setPayment(1);
 
-        $em->remove($bill);
+        $em->persist($bill);
         $em->flush();
 
         return $this->redirectToRoute('listBills');

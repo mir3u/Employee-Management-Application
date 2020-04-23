@@ -25,7 +25,10 @@
 
                                 {% if bill.payment == 0 %}
                                     <td><a href="{{ path("payBill", {id: bill.id}) }}"><button class="btn btn-warning">Pay Bill</button></a></td>
+                                    {% else %}
+                                    <td> Payed</td>
                                 {% endif %}
+
 
                                 <td><a href="{{ path("editBill", {id: bill.id}) }}"><button class="btn btn-primary">Edit Bill</button></a> </td>
 
