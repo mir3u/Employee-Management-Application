@@ -1,7 +1,7 @@
 # **REQUIREMENTS and basic commands**
 
 
-For WINDOWS:
+**For WINDOWS:**
 Install 
 php 7.4: https://windows.php.net/downloads/releases/php-7.4.5-Win32-vc15-x64.zip
 
@@ -11,7 +11,7 @@ Symfony cli: https://get.symfony.com/cli/setup.exe
 
 Yarn: https://classic.yarnpkg.com/en/docs/install/
 
-FOR UNIX/MAC:
+**FOR UNIX/MAC:**
 
 php 7.4: for unix ppa-ondrej for mac  brew install php@7.4
 
@@ -30,7 +30,7 @@ After this run the following commands:
 
 composer install
 
-php bin/console doctrine:schema:update --force --dump-sql (!!!!! ALWAYS RUN THIS COMMAND AFTER CREATING OR CHANGING AN ENTITY)
+php bin/console doctrine:schema:update --force --dump-sql **(!!!!! ALWAYS RUN THIS COMMAND AFTER CREATING OR CHANGING AN ENTITY)**
 
 php bin/console cache:warmup
 
