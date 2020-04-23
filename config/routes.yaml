@@ -1,0 +1,42 @@
+index:
+    path: /
+    controller: App\Controller\HomeController::index
+
+home:
+  path: /home
+  controller: App\Controller\HomeController::home
+
+register:
+  path: /register/
+  controller: App\Controller\RegisterController::register
+
+login:
+  path: /login/
+  controller: App\Controller\LoginController::login
+errorPage:
+  path: /error/
+  controller: App\Controller\ErrorPageController:main
+newMeeting:
+  path: /meeting/new/
+  controller: App\Controller\MeetingControler:createMeeting
+newBill:
+  path: /bill/new/
+  controller: App\Controller\BillController:newBill
+
+listBills:
+  path: /bill/list/
+  controller: App\Controller\BillController:listBills
+
+editBill:
+  path: /bill/edit/{id}
+  controller: App\Controller\BillController::editBill
+
+deleteBill:
+  path: /bill/delete/{id}
+  controller: App\Controller\BillController:deleteBill
+
+payBill:
+  path: /bill/pay/{id}
+  controller: App\Controller\BillController:payBill
+
+

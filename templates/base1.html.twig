@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% block head %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <!-- Popper JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Font Awesome JS -->
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+{#        <link rel="stylesheet" href="/css/styles.css">#}
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block title %} <title> DS Project!</title>{% endblock %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {# 'app' must match the first argument to addEntry() in webpack.config.js #}
+        {{ encore_entry_link_tags('app') }}
+
+{#        <!-- Renders a link tag (if your module requires any CSS)#}
+{#             <link rel="stylesheet" href="/build/app.css"> -->#}
+    {% endblock %}
+</head>
+<body>
+{% block navbar %}
+<div id="navbar">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark justify-content-end fixed-top ">
+        <ul class="nav nav-pills">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        {% if app.session.get('user')  %}
+            <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+                <ul class="navbar-nav m-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout">Logout</a>
+                    </li>
+
+                </ul>
+
+            </div>
+        </ul>
+
+{% else %}
+
+        <li class="nav-item namestore"></li> <a href="/home" class="nav-link"> DS Project</a>
+        <li class="nav-item"><a class="nav-link"  href="/register"> Register</a></li>
+        <li class="nav-item"><a class="nav-link " href="/login"> Login</a></li></ul>
+
+        </nav>
+        {% endif %}
+</div>
+{% endblock %}
+{#{% include "./sidebar.html.twig" %}#}
+{% block body %}
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% endblock %}
+
+{% block footer %} {% endblock %}
+
+</body>
+</html>

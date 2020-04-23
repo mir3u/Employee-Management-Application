@@ -1,0 +1,21 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="container-fluid">
+        {#        <div class="col-md-6"> <p> </p></div>#}
+        <div class="container">
+            <div class="col-md-12">
+                <div class="form-group">
+                    {{ form(form) }}
+                </div>
+                <a href="{{ url('register') }}">Register</a>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
