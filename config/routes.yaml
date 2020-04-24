@@ -39,4 +39,8 @@ payBill:
   path: /bill/pay/{id}
   controller: App\Controller\BillController:payBill
 
+logout:
+  path: /logout/
+  controller: App\Controller\LogoutController:main
+
 

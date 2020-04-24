@@ -50,7 +50,7 @@ class BillController extends AbstractController
 
 
         usort($bills,function($first,$second){
-            return $first->getPayment() < $second->getPayment();
+            return $first->getPayment() > $second->getPayment();
         });
 
 //        die(var_dump($bills));

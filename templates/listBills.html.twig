@@ -7,6 +7,7 @@
     <p>  </p>
 
     <div class="container-fluid">
+
         {#        <div class="col-md-6"> <p> </p></div>#}
         <div class="container">
             {#            <div class="col-md-12">#}
@@ -46,4 +47,20 @@
         </div>
     </div>
     </div>
+{% endblock %}
+
+{% block footer %}
+
+<script>
+    $(document).ready(function(){
+    var searchText = $(this).val().toLowerCase();
+    $.each($("#table tbody tr"), function() {
+    if($(this).text().toLowerCase().indexOf(searchText) === -1){
+         $(this).hide();
+    } else {
+          $(this) . show();
+      }
+    });
+    });
+</script>
 {% endblock %}
