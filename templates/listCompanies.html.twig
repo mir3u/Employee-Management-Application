@@ -1,0 +1,103 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+
+    <div class="container-fluid">
+
+        {#        <div class="col-md-6"> <p> </p></div>#}
+        <div class="container">
+            {#            <div class="col-md-12">#}
+            {% if companies %}
+                {#                <ul>#}
+                {% for company in companies %}
+                    <div class="container bill">
+                        <table class="companyTable">
+                            <tr>
+                                <th>Company No.</th>
+
+                                <th>Company Name</th>
+                                <th>Service</th>
+                                <th>Price</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </tr>
+                            <tr>
+                                <td>{{ company.id }}</td>
+
+                                <td>{{ company.companyName }}</td>
+                                <td>{{ company.service1 }}</td>
+                                <td>{{ company.price1 }}</td>
+                                <td>{{ company.startDate1 | date('Y-m-d')}}</td>
+                                <td>{{ company.endDate1 | date('Y-m-d') }}</td>
+                            </tr>
+                            {% if company.service2 %}
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </tr>
+
+                            <tr>
+                                <td>{{ company.service2 }}</td>
+                                <td>{{ company.price2 }}</td>
+                                <td>{{ company.startDate2|date('Y-m-d')}}</td>
+                                <td>{{ company.endDate2 |date('Y-m-d')}}</td>
+
+                            </tr>
+                            {% endif %}
+                            {% if company.service3 %}
+                            <tr>
+                                <th>Service</th>
+                                <th>Price</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                            </tr>
+                            <tr>
+
+
+                                <td>{{ company.service3 }}</td>
+                                <td>{{ company.price3 }}</td>
+                                <td>{{ company.startDate3|date('Y-m-d')}}</td>
+                                <td>{{ company.endDate3 |date('Y-m-d')}}</td>
+                                {% else %}
+                                    <tr>
+                                {% endif %}
+
+                                <td><a href="{{ path("editCompanies", {id: company.id}) }}"><button class="btn btn-primary">Edit Company</button></a> </td>
+
+                                <td><a href="{{ path("deleteCompanies", {id: company.id}) }}"><button class="btn btn-danger">Delete Company</button></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                {#                </ul>#}
+                <a href="{{ path("addCompany") }}"><button class="btn btn-primary">Add Company</button></a>
+            {% else %}
+                <h4>No company to show! <a href="{{ path("addCompany") }}"><button class="btn btn-primary">Add Company</button></a> </h4>
+            {% endif %}
+            {#                </div>#}
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+    <script>
+        $(document).ready(function(){
+            var searchText = $(this).val().toLowerCase();
+            $.each($("#table tbody tr"), function() {
+                if($(this).text().toLowerCase().indexOf(searchText) === -1){
+                    $(this).hide();
+                } else {
+                    $(this) . show();
+                }
+            });
+        });
+    </script>
+{% endblock %}

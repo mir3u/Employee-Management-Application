@@ -43,4 +43,36 @@ logout:
   path: /logout/
   controller: App\Controller\LogoutController:main
 
+addEmployee:
+  path: /employee/add/
+  controller: App\Controller\EmployeeController::add
+
+listEmployees:
+  path: /employee/list/
+  controller: App\Controller\EmployeeController::listEmployees
+
+editEmployees:
+  path: /employee/edit/{id}
+  controller: App\Controller\EmployeeController::editEmployee
+
+deleteEmployees:
+  path: /employee/delete/{id}
+  controller: App\Controller\EmployeeController:deleteEmployee
+
+addCompany:
+  path: /company/add/
+  controller: App\Controller\CompanyController:add
+
+listCompanies:
+  path: /company/list/
+  controller: App\Controller\CompanyController:listCompanies
+
+editCompanies:
+  path: /company/edit/{id}
+  controller: App\Controller\CompanyController:editCompany
+
+deleteCompanies:
+  path: /company/delete{id}
+  controller: App\Controller\CompanyController:deleteCompany
+
 
