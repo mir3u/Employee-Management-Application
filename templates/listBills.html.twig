@@ -7,6 +7,7 @@
     <p>  </p>
 
     <div class="container-fluid">
+
         {#        <div class="col-md-6"> <p> </p></div>#}
         <div class="container">
             {#            <div class="col-md-12">#}
@@ -25,7 +26,10 @@
 
                                 {% if bill.payment == 0 %}
                                     <td><a href="{{ path("payBill", {id: bill.id}) }}"><button class="btn btn-warning">Pay Bill</button></a></td>
+                                    {% else %}
+                                    <td> Payed</td>
                                 {% endif %}
+
 
                                 <td><a href="{{ path("editBill", {id: bill.id}) }}"><button class="btn btn-primary">Edit Bill</button></a> </td>
 
@@ -43,4 +47,20 @@
         </div>
     </div>
     </div>
+{% endblock %}
+
+{% block footer %}
+
+<script>
+    $(document).ready(function(){
+    var searchText = $(this).val().toLowerCase();
+    $.each($("#table tbody tr"), function() {
+    if($(this).text().toLowerCase().indexOf(searchText) === -1){
+         $(this).hide();
+    } else {
+          $(this) . show();
+      }
+    });
+    });
+</script>
 {% endblock %}

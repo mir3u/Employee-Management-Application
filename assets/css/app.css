@@ -81,6 +81,8 @@ var {
     /*box-shadow: 10px 10px 5px grey;*/
 }
 
+.companyTable,
+.employeeTable,
 .billTable{
     table-layout: fixed;
     width: 80%;

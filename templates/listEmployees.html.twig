@@ -1,0 +1,104 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+
+    <div class="container-fluid">
+
+        {#        <div class="col-md-6"> <p> </p></div>#}
+        <div class="container">
+            {#            <div class="col-md-12">#}
+            {% if employees %}
+                {#                <ul>#}
+                {% for employee in employees %}
+                    <div class="container bill">
+                        <table class="employeeTable">
+                            <tr>
+                            <th>Employee No.</th>
+
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>Telephone</th>
+                            <th>Email</th>
+                            <th>Certifications</th>
+                            </tr>
+                            <tr>
+                                <td>{{ employee.id }}</td>
+
+                                <td>{{ employee.firstName }}</td>
+                                <td>{{ employee.lastName }}</td>
+                                <td>{{ employee.address }}</td>
+                                <td>{{ employee.telephone }}</td>
+                                <td>{{ employee.email }}</td>
+                                <td>{{ employee.certification }}</td>
+                            </tr>
+                            <tr>
+                            <th>Monday Start</th>
+                            <th>Monday End</th>
+                            <th>Tuesday Start</th>
+                            <th>Tuesday End</th>
+                            <th>Wednesday Start</th>
+                            <th>Wednesday End</th>
+                            <th>Thursday Start</th>
+                            <th>Thursday End</th>
+                            <th>Friday Start</th>
+                            <th>Friday End</th>
+                            </tr>
+                            <tr>
+                                <td>{{ employee.availabilityStart1|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityEnd1|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityStart2|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityEnd2|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityStart3|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityEnd3|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityStart4|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityEnd4|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityStart5|date('h:i:s') }}</td>
+                                <td>{{ employee.availabilityEnd5|date('h:i:s') }}</td>
+                            </tr>
+                            <tr>
+                            <th>Payment/h</th>
+                            <th>Hours/week</th>
+                            </tr>
+                            <tr>
+
+
+                                <td>{{ employee.payment }}</td>
+                                <td>{{ employee.hours }}</td>
+                                <td><a href="{{ path("editEmployees", {id: employee.id}) }}"><button class="btn btn-primary">Edit Employee</button></a> </td>
+
+                                <td><a href="{{ path("deleteEmployees", {id: employee.id}) }}"><button class="btn btn-danger">Delete Employee</button></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                {#                </ul>#}
+                <a href="{{ path("addEmployee") }}"><button class="btn btn-primary">Add Employee</button></a>
+            {% else %}
+                <h4>No employee to show! <a href="{{ path("addEmployee") }}"><button class="btn btn-primary">Add Employee</button></a> </h4>
+            {% endif %}
+            {#                </div>#}
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+    <script>
+        $(document).ready(function(){
+            var searchText = $(this).val().toLowerCase();
+            $.each($("#table tbody tr"), function() {
+                if($(this).text().toLowerCase().indexOf(searchText) === -1){
+                    $(this).hide();
+                } else {
+                    $(this) . show();
+                }
+            });
+        });
+    </script>
+{% endblock %}
