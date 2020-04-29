@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\Availability;
 use App\Entity\Employee;
 use App\Entity\User;
 use App\Form\EmployeeType;
@@ -46,6 +47,7 @@ class EmployeeController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
+            /** @var Employee $add */
             $add = $form->getData();
 
 
@@ -56,6 +58,48 @@ class EmployeeController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($add);
                 $entityManager->flush();
+
+                $aviabilityMonday = new Availability();
+                $aviabilityMonday->setDay("monday");
+                $aviabilityMonday->setStartTime($add->getAvailabilityStart1());
+                $aviabilityMonday->setEndtime($add->getAvailabilityEnd1());
+                $aviabilityMonday->getUser($add);
+                $entityManager->persist($aviabilityMonday);
+                $entityManager->flush();
+
+                $aviabilityTuesday = new Availability();
+                $aviabilityTuesday->setDay("tuesday");
+                $aviabilityTuesday->setStartTime($add->getAvailabilityStart2());
+                $aviabilityTuesday->setEndtime($add->getAvailabilityEnd2());
+                $aviabilityTuesday->getUser($add);
+                $entityManager->persist($aviabilityTuesday);
+                $entityManager->flush();
+
+                $aviabilityWednesday = new Availability();
+                $aviabilityWednesday->setDay("wednesday");
+                $aviabilityWednesday->setStartTime($add->getAvailabilityStart3());
+                $aviabilityWednesday->setEndtime($add->getAvailabilityEnd3());
+                $aviabilityWednesday->getUser($add);
+                $entityManager->persist($aviabilityWednesday);
+                $entityManager->flush();
+
+                $aviabilityThursday = new Availability();
+                $aviabilityThursday->setDay("thursday");
+                $aviabilityThursday->setStartTime($add->getAvailabilityStart4());
+                $aviabilityThursday->setEndtime($add->getAvailabilityEnd4());
+                $aviabilityThursday->getUser($add);
+                $entityManager->persist($aviabilityThursday);
+                $entityManager->flush();
+
+                $aviabilityFriday = new Availability();
+                $aviabilityFriday->setDay("friday");
+                $aviabilityFriday->setStartTime($add->getAvailabilityStart5());
+                $aviabilityFriday->setEndtime($add->getAvailabilityEnd5());
+                $aviabilityFriday->getUser($add);
+                $entityManager->persist($aviabilityFriday);
+                $entityManager->flush();
+
+
                 return $this->redirectToRoute('listEmployees');}
         }else{
 

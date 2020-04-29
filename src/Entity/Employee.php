@@ -96,91 +96,91 @@ class Employee
     private $user;
 
     /**
- * @return mixed
- */
-public function getId()
-{
-    return $this->id;
-}/**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }/**
  * @param mixed $id
  */
-public function setId($id): void
-{
-    $this->id = $id;
-}/**
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }/**
  * @return mixed
  */
-public function getFirstName()
-{
-    return $this->firstName;
-}/**
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }/**
  * @param mixed $firstName
  */
-public function setFirstName($firstName): void
-{
-    $this->firstName = $firstName;
-}/**
+    public function setFirstName($firstName): void
+    {
+        $this->firstName = $firstName;
+    }/**
  * @return mixed
  */
-public function getLastName()
-{
-    return $this->lastName;
-}/**
+    public function getLastName()
+    {
+        return $this->lastName;
+    }/**
  * @param mixed $lastName
  */
-public function setLastName($lastName): void
-{
-    $this->lastName = $lastName;
-}/**
+    public function setLastName($lastName): void
+    {
+        $this->lastName = $lastName;
+    }/**
  * @return mixed
  */
-public function getAddress()
-{
-    return $this->address;
-}/**
+    public function getAddress()
+    {
+        return $this->address;
+    }/**
  * @param mixed $address
  */
-public function setAddress($address): void
-{
-    $this->address = $address;
-}/**
+    public function setAddress($address): void
+    {
+        $this->address = $address;
+    }/**
  * @return mixed
  */
-public function getTelephone()
-{
-    return $this->telephone;
-}/**
+    public function getTelephone()
+    {
+        return $this->telephone;
+    }/**
  * @param mixed $telephone
  */
-public function setTelephone($telephone): void
-{
-    $this->telephone = $telephone;
-}/**
+    public function setTelephone($telephone): void
+    {
+        $this->telephone = $telephone;
+    }/**
  * @return mixed
  */
-public function getEmail()
-{
-    return $this->email;
-}/**
+    public function getEmail()
+    {
+        return $this->email;
+    }/**
  * @param mixed $email
  */
-public function setEmail($email): void
-{
-    $this->email = $email;
-}/**
+    public function setEmail($email): void
+    {
+        $this->email = $email;
+    }/**
  * @return mixed
  */
-public function getCertification()
-{
-    return $this->certification;
-}/**
+    public function getCertification()
+    {
+        return $this->certification;
+    }/**
  * @param mixed $certification
  */
-public function setCertification($certification): void
-{
-    $this->certification = $certification;
+    public function setCertification($certification): void
+    {
+        $this->certification = $certification;
 
-}
+    }
 
     /**
      * @return mixed
@@ -359,28 +359,28 @@ public function setCertification($certification): void
     }/**
  * @return mixed
  */
-public function getPayment()
-{
-    return $this->payment;
-}/**
+    public function getPayment()
+    {
+        return $this->payment;
+    }/**
  * @param mixed $payment
  */
-public function setPayment($payment): void
-{
-    $this->payment = $payment;
-}/**
+    public function setPayment($payment): void
+    {
+        $this->payment = $payment;
+    }/**
  * @return mixed
  */
-public function getHours()
-{
-    return $this->hours;
-}/**
+    public function getHours()
+    {
+        return $this->hours;
+    }/**
  * @param mixed $hours
  */
-public function setHours($hours): void
-{
-    $this->hours = $hours;
-}
+    public function setHours($hours): void
+    {
+        $this->hours = $hours;
+    }
 
 
 
