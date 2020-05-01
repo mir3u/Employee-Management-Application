@@ -98,4 +98,22 @@ newPdf:
   path: /pdf/new/
   controller: App\Controller\PdfController:newPdf
 
+addOffer:
+  path: /offers/add/
+  controller: App\Controller\OfferController:add
 
+listOffers:
+  path: /offers/list/
+  controller: App\Controller\OfferController:listOffers
+
+editOffer:
+  path: /offers/edit/{id}
+  controller: App\Controller\OfferController:editOffer
+
+deleteOffer:
+  path: /offers/delete{id}
+  controller: App\Controller\OfferController:deleteOffer
+
+chooseOffer:
+  path: /offers/choose{id}
+  controller: App\Controller\OfferController:chooseOffer
