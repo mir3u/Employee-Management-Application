@@ -14,26 +14,62 @@
     {#    </div>#}
     {#</section>#}
 
+    <div class="card-deck">
+        <div class="card" style="margin-left:100px;">
+            <img class="card-img-top" src="{{ asset('img/emp.jpg') }}" alt="Employees" style="height:180px;">
+            <div class="card-body">
+            <h5 class="card-title">Employees</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <a href="/employee/list" class="btn btn-primary">Manage employees</a>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="{{ asset('img/bill.jpg') }}" alt="Bills" style="height:180px;">
+            <div class="card-body">
+            <h5 class="card-title">Bills</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <a href="/bill/list" class="btn btn-primary">Manage bills</a>
+            </div>
+        </div>
+        <div class="card" style="margin-right:100px;">
+            <img class="card-img-top" src="{{ asset('img/compa.jpg') }}" alt="Companies" style="height:180px;">
+            <div class="card-body">
+            <h5 class="card-title">Companies</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <a href="/company/list" class="btn btn-primary">Manage companies</a>
+            </div>
+        </div>
     </div>
-    <div class="campanii">
-        <div class="row">
-            <div class="col-3 elem1 "><h3><a href="/employee/list"> Employees</a></h3></div>
-            <div class="col-3  elem1"><h3><a href="/bill/list"> Bills</a></h3></div>
 
+    <div class="card-deck" style="margin-top:50px;">
+        <div class="card" style="margin-left:100px;">
+            <img class="card-img-top" src="{{ asset('img/cust.jpg') }}" alt="Customers" style="height:180px;">
+            <div class="card-body">
+            <h5 class="card-title">Customers</h5>
+            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <a href="/customer/list" class="btn btn-primary">Manage customers</a>
+            </div>
+        </div>
+        <div class="card">
+            <img class="card-img-top" src="{{ asset('img/mail.jpg') }}" alt="Mailing" style="height:180px;">
+            <div class="card-body">
+            <h5 class="card-title">Mailing</h5>
+            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <a href="{{ path("newMail") }}" class="btn btn-primary">Send mail</a>
+            </div>
+        </div>
+        <div class="card" style="margin-right:100px;">
+            <img class="card-img-top" src="{{ asset('img/pdf.jpg') }}" alt="Profit" style="height:180px;">
+            <div class="card-body">
+            <h5 class="card-title">Clients' profit report</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <a href="{{ path("newPdf") }}" class="btn btn-primary">Export</a>
+            </div>
         </div>
     </div>
-    <div class="campanii">
-        <div class="row">
-            <div class="col-sm-3 mr-auto elem1 "><h3><a href="/company/list"> Companies</a></h3></div>
-            <div class="col-sm-3 mr-auto elem1 "><h3><a href="/customer/list"> Customers</a></h3></div>
-            <div class="col-sm-3 mr-auto elem1">miruna vreau sa faci merge pe linia asta</div>
-        </div>
-        <div class="row"><a href="/customer/list"></a></div>
-    </div>
-    <div class="campanii">
-        <div class="row">
-            <div class="col-sm-3 mr-auto elem1 "><h3><a href="{{ path("newMail") }}" > Send mail!</a></h3></div>
-            <div class="col-sm-3 mr-auto elem1"><h3><a href="{{ path("newPdf") }}" > Extract Clients Report</a></h3></div>
-        </div>
-    </div>
+
+
+
+  
+</div>
 {% endblock %}

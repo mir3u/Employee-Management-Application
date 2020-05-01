@@ -6,5 +6,32 @@
     </head>
     <body>
         <p>Most profitable clients</p>
+
+        {% if customers %}
+<table>
+                <tr>
+                    <td>Customer details</td>
+                    <td>Email</td>
+                    <td>Phone number</td>
+                    <td>Location</td>
+                    <td>Due date</td>
+                    <td>Feedback</td>
+                </tr>
+                {% for customer in customers %}
+                    <div>
+                        <tr>
+                            <td>{{ customer.details }}</td>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.phoneNo }}</td>
+                            <td>{{ customer.location }}</td>
+                            <td>{{ customer.dueDate |date('Y-m-d') }}</td>
+                            <td>{{ customer.feedback }}</td>
+                        </tr>
+                    </div>
+                {% endfor %}
+            </table>
+            {% else %}
+            <h4>No customers to show!</h4>
+        {% endif %}
     </body>
 </html>

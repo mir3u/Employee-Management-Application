@@ -18,13 +18,19 @@ class PdfController extends AbstractController
         // Configure Dompdf according to your needs
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
+        $pdfOptions->set('isHtml5ParserEnabled', TRUE);
         
         // Instantiate Dompdf with our options
         $dompdf = new Dompdf($pdfOptions);
+
+        /** @var \App\Entity\Customer[] $companies */
+        $customers=$this->getDoctrine()
+            ->getRepository(\App\Entity\Customer::class)
+            ->findAll();
         
         // Retrieve the HTML generated in our twig file
-        $html = $this->renderView('newPdf.html.twig', [
-            'title' => "Welcome to our PDF Test"
+        $html = $this->render('newPdf.html.twig', [
+            'title' => "Welcome to our PDF",'customers'=>$customers
         ]);
         
         // Load HTML to Dompdf
