@@ -1,0 +1,74 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p></p>
+
+    <div class="container-fluid">
+        <div class="container">
+            {% if customers %}
+            <table class="table">
+                <tr>
+                    <th>Customer details</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Location</th>
+                    <th>Due date</th>
+                    <th>Feedback</th>
+                    <th>XX</th>
+                    <th>XX</th>
+                </tr>
+                {% for customer in customers %}
+                    <div>
+                        <tr scope="row">
+                            <td scope="col">{{ customer.details }}</td>
+                            <td scope="col">{{ customer.email }}</td>
+                            <td scope="col">{{ customer.phoneNo }}</td>
+                            <td scope="col">{{ customer.location }}</td>
+                            <td scope="col">{{ customer.dueDate |date('Y-m-d') }}</td>
+                            <td scope="col">{{ customer.feedback }}</td>
+                            <td scope="col"><a href="{{ path("editCustomers", {id: customer.id}) }}">
+                                    <button class="btn btn-primary">Edit</button>
+                                </a></td>
+                            <td><a href="{{ path("deleteCustomers", {id: customer.id}) }}">
+                                    <button class="btn btn-danger">Delete</button>
+                                </a></td>
+                        </tr>
+                    </div>
+                {% endfor %}
+                <br>
+                <tr><a href="{{ path("addCustomer") }}">
+                        <button class="btn btn-primary">Add customer</button>
+                    </a></tr>
+                <br>
+            </table>
+        </div>
+
+        {#                </ul>#}
+
+        {% else %}
+            <h4>No customers to show! <a href="{{ path("addCustomer") }}">
+                    <button class="btn btn-primary">Add customer</button>
+                </a></h4>
+        {% endif %}
+        {#                </div>#}
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+    <script>
+        $(document).ready(function() {
+            var searchText=$(this).val().toLowerCase();
+            $.each($('#table tbody tr'),function() {
+                if($(this).text().toLowerCase().indexOf(searchText)=== -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+    </script>
+{% endblock %}
