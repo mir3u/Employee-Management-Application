@@ -75,4 +75,12 @@ deleteCompanies:
   path: /company/delete{id}
   controller: App\Controller\CompanyController:deleteCompany
 
+newMail:
+  path: /mail/new/
+  controller: App\Controller\MailController:newMail
+
+newPdf:
+  path: /pdf/new/
+  controller: App\Controller\PdfController:newPdf
+
 
