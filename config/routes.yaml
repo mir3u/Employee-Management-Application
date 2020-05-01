@@ -1,6 +1,6 @@
 index:
-    path: /
-    controller: App\Controller\HomeController::index
+  path: /
+  controller: App\Controller\HomeController::index
 
 home:
   path: /home
@@ -74,5 +74,20 @@ editCompanies:
 deleteCompanies:
   path: /company/delete{id}
   controller: App\Controller\CompanyController:deleteCompany
+addCustomer:
+  path: /customer/add/
+  controller: App\Controller\CustomerController:add
+
+listCustomers:
+  path: /customer/list/
+  controller: App\Controller\CustomerController:listCustomers
+
+editCustomers:
+  path: /customer/edit/{id}
+  controller: App\Controller\CustomerController:editCustomer
+
+deleteCustomers:
+  path: /customer/delete{id}
+  controller: App\Controller\CustomerController:deleteCustomer
 
 
