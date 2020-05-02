@@ -2,6 +2,7 @@
 
 
 namespace App\Entity;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  *
@@ -34,7 +35,7 @@ class Availability
     private $endtime;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Employee", mappedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
      */
     private $user;
 

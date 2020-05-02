@@ -91,7 +91,7 @@ class Employee
     private $hours;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $user;
 

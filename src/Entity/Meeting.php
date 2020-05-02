@@ -3,7 +3,13 @@
 
 namespace App\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ *
+ * @ORM\Entity()
+ * @ORM\Table(name="meeting")
+ */
 class Meeting
 {
     /**
@@ -34,7 +40,12 @@ class Meeting
     private $equipment;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\Employee", mappedBy="id")
+     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\AttendeesMeeting")
      */
     private $attendees;
 
@@ -133,6 +144,23 @@ class Meeting
     {
         $this->attendees = $attendees;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user): void
+    {
+        $this->user = $user;
+    }
+
 
 
 

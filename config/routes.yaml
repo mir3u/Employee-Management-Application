@@ -18,7 +18,7 @@ errorPage:
   controller: App\Controller\ErrorPageController:main
 newMeeting:
   path: /meeting/new/
-  controller: App\Controller\MeetingControler:createMeeting
+  controller: App\Controller\MeetingController:createMeeting
 newBill:
   path: /bill/new/
   controller: App\Controller\BillController:newBill
@@ -90,4 +90,10 @@ deleteCustomers:
   path: /customer/delete{id}
   controller: App\Controller\CustomerController:deleteCustomer
 
+addAttendees:
+  path: /meeting/new/attendees/{meetingId}/
+  controller: App\Controller\MeetingController:addAttendees
 
+listMeeting:
+  path: /meeting/list
+  controller: App\Controller\MeetingController:listMeeting

@@ -40,6 +40,11 @@ class User
     private $email;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Employee", mappedBy="id")
+     */
+    private $employees;
+
+    /**
      * @return mixed
      */
     public function getId()
@@ -134,6 +139,24 @@ class User
     {
         $this->email = $email;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getEmployees()
+    {
+        return $this->employees;
+    }
+
+    /**
+     * @param mixed $employees
+     */
+    public function setEmployees($employees): void
+    {
+        $this->employees = $employees;
+    }
+
+
 
 
 
