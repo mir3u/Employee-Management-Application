@@ -22,7 +22,7 @@
                             <th>Offer Service 2</th>
                             <th>Offer Service 3</th>
                             <th>Price</th>
-                            <th>Choose</th>
+
                             </tr>
                         {% for offer in offers %}
                             <tr>
@@ -37,13 +37,19 @@
                         {% endfor %}
                         </table>
                     </div>
-                {#                </ul>#}
                 <a href="{{ path("addOffer") }}"><button class="btn btn-primary">Add Offer</button></a>
+                <div class="row" style="margin-top: 3%">
+                <h3>Forecast</h3><br>
+
+                </div>
+                <div class="row">
+                    You should advertise more: {{ promote.offerName }}
+                </div>
+                {#                </ul>#}
             {% else %}
                 <h4>No offer to show! <a href="{{ path("addOffer") }}"><button class="btn btn-primary">Add Offer</button></a> </h4>
             {% endif %} <br><br>
-            <h3>Forecast</h3><br>
-            You should advertise more: {{ promote.offerName }}
+
             {#                </div>#}
         </div>
     </div>

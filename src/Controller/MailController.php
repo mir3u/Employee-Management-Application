@@ -19,6 +19,7 @@ class MailController extends AbstractController
 
         $form = $this->createFormBuilder()
             ->add('receiver', TextType::class, ['label' => 'Receiver'])
+            ->add('address', TextType::class, ['label' => 'Address'])
             ->add('content', TextType::class, ['label' => 'Content'])
             ->add('awb', TextType::class, ['label' => 'Awb'])
             ->add('save', SubmitType::class, ['label' => 'Send Mail'])
@@ -27,6 +28,7 @@ class MailController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
             $mail = $form->getData();
 
             $message = (new \Swift_Message('Hello!'))
@@ -35,7 +37,8 @@ class MailController extends AbstractController
                 ->setBody($mail[ 'content' ],'text/plain');
 
             $mailer->send($message);
-            
+            $entityManager->persist($mail);
+            $entityManager->flush();
 
         }
         return $this->render('newMail.html.twig', array('form'=>$form->createView()));

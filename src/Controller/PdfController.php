@@ -60,9 +60,13 @@ class PdfController extends AbstractController
         
         // Write file to the desired path
         file_put_contents($pdfFilepath, $output);
-        
+
+
+        $dompdf->stream($pdfFilepath, [
+             "Attachment" => true
+         ]);
         // Send some text response
-        return new Response("The PDF file has been succesfully generated !");
+        return new Response("The PDF file has been successfully generated !");
 
     }
 }
