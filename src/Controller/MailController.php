@@ -43,22 +43,32 @@ class MailController extends AbstractController
             $mail = $form->getData();
 
 
-            try {
-                $transport = new \Swift_SmtpTransport('imap.gmail.com', 993);
+//            try {
+//                $transport = new \Swift_SmtpTransport('imap.gmail.com', 993);
+//
+//                $mailer = new \Swift_Mailer($transport);
+//                $message = (new \Swift_Message('Hello!'))
+//                    ->setFrom('ana.bratucu@gmail.com')
+//                    ->setTo($mail->getReceiverEmail())
+//                    ->setBody($mail->getContent(), 'text/plain');
+//
+//                $mailer->send($message);
+//            }catch (\Swift_TransportException $e){
+//                echo $e;
+//            }
+//
+//
+//            $mail->setUser($company);
+//            $entityManager->persist($mail);
+//            $entityManager->flush();
+            $body = "You have a new order that will be brought to you to the address " . $mail[ 'address' ] . " with the contents of " . $mail[ 'content' ] . '. The AWB is: ' . $mail[ 'awb' ] . '.';
 
-                $mailer = new \Swift_Mailer($transport);
-                $message = (new \Swift_Message('Hello!'))
-                    ->setFrom('ana.bratucu@gmail.com')
-                    ->setTo($mail->getReceiverEmail())
-                    ->setBody($mail->getContent(), 'text/plain');
+            $message = (new \Swift_Message('Hello!'))
+                ->setFrom('ana.bratucu@gmail.com')
+                ->setTo($mail[ 'receiver' ])
+                ->setBody($body,'text/plain');
 
-                $mailer->send($message);
-            }catch (\Swift_TransportException $e){
-                echo $e;
-            }
-
-
-            $mail->setUser($company);
+            $mailer->send($message);
             $entityManager->persist($mail);
             $entityManager->flush();
 
