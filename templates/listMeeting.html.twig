@@ -1,0 +1,72 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+
+    <div class="container-fluid">
+
+        {#        <div class="col-md-6"> <p> </p></div>#}
+        <div class="container">
+            {#            <div class="col-md-12">#}
+            {% if meetings %}
+                {#                <ul>#}
+                {% for meeting in meetings %}
+                    <div class="container bill">
+                        <table class="billTable">
+                            <th>Name</th>
+                            <th>Start</th>
+                            <th>Location</th>
+                            <th>Hall</th>
+                            <tr>
+                                <td>{{ meeting.details.name }}</td>
+                                <td>{{ meeting.details.start|date('d-m-Y H:i:s') }} </td>
+                                <td>{{ meeting.details.location}}</td>
+                                <td>{{ meeting.details.hall}}</td>
+
+                            </tr>
+                            <th>Attendees</th>
+                            {% if meeting.attendees %}
+                                {% for attendees in meeting.attendees  %}
+                                <tr>
+                                    <td>{{ attendees }}</td>
+                                </tr>
+                                {% endfor %}
+                            {% endif %}
+                            <tr>
+
+                                <td><a href="{{ path("editMeeting", {id: meeting.details.id}) }}"><button class="btn btn-primary">Edit Meeting</button></a> </td>
+
+                                <td><a href="{{ path("deleteMeeting", {id: meeting.details.id}) }}"><button class="btn btn-danger">Delete Meeting</button></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                {#                </ul>#}
+                <a href="{{ path("newMeeting") }}"><button class="btn btn-primary">Add Meeting</button></a>
+            {% else %}
+                <h4>You have no meeting! <a href="{{ path("newMeeting") }}"><button class="btn btn-primary">New Meeting</button></a> </h4>
+            {% endif %}
+            {#                </div>#}
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+    <script>
+        $(document).ready(function(){
+            var searchText = $(this).val().toLowerCase();
+            $.each($("#table tbody tr"), function() {
+                if($(this).text().toLowerCase().indexOf(searchText) === -1){
+                    $(this).hide();
+                } else {
+                    $(this) . show();
+                }
+            });
+        });
+    </script>
+{% endblock %}
