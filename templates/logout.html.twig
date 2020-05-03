@@ -3,17 +3,17 @@
 
 
 {% block body %}
-<br><br><br>
-<p>  </p>
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <br><br><br>
+    <p>  </p>
     <div class="container-fluid">
         {#        <div class="col-md-6"> <p> </p></div>#}
-        <div class="container">
-            <div class="form-align">
+        <div class="container" align="center">
+            <div class="col-md-3">
                 <div class="form-group">
-                    {{ form(form) }}
+                    <a href="{{ url('login') }}">Login</a>
                 </div>
             </div>
         </div>
     </div>
+
 {% endblock %}

@@ -70,3 +70,7 @@ var {
     background-color: #FFFFFF;
     display: inline-block;
 }
+
+body{
+    background-color: red;
+}

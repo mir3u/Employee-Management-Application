@@ -20,6 +20,16 @@ class BillController extends AbstractController
 {
 
     public function newBill(Request $request){
+        $session = $request->getSession();
+        $companyName = $session->get('user');
+
+        $company = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['username' => $companyName]);
+        if ($session->get('user') === null) {
+            return $this->redirectToRoute('login');
+        }
+
         $bill = new Bill();
         $time = new \DateTime();
         $timezone = new \DateTimeZone('Europe/Bucharest');
@@ -34,6 +44,7 @@ class BillController extends AbstractController
             $bill = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $bill->setPayment(0);
+            $bill->setUser($company);
             $entityManager->persist($bill);
             $entityManager->flush();
 
@@ -43,17 +54,26 @@ class BillController extends AbstractController
     }
 
     public function listBills(Request $request){
+        $session = $request->getSession();
+        $companyName = $session->get('user');
+
+        $company = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['username' => $companyName]);
+        if ($session->get('user') === null) {
+            return $this->redirectToRoute('login');
+        }
+
         /** @var Bill[] $bills */
         $bills = $this->getDoctrine()
             ->getRepository(Bill::class)
-            ->findAll();
+            ->findBy(['user' => $company]);
 
 
         usort($bills,function($first,$second){
             return $first->getPayment() > $second->getPayment();
         });
 
-//        die(var_dump($bills));
 
         return $this->render('listBills.html.twig', ['bills' => $bills]);
 

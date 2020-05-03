@@ -1,0 +1,34 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+    {% form_theme form 'bootstrap_4_layout.html.twig' %}
+    <div class="container-fluid">
+        {#        <div class="col-md-6"> <p> </p></div>#}
+        <div class="container">
+            <div class="col-md-12">
+                <h4>Add meeting details.</h4>
+                <div class="form-group">
+                    {{ form_start(form) }}
+                    <div class="my-custom-class-for-errors">
+                        {{ form_errors(form) }}
+                    </div>
+
+
+                            {{ form_row(form.start) }}
+
+                        {{ form_row(form.location) }}
+
+                        {{ form_row(form.hall) }}
+
+                        {{ form_row(form.equipment) }}
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

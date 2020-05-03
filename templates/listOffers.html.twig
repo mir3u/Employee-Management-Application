@@ -1,0 +1,61 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+
+    <div class="container-fluid">
+
+        {#        <div class="col-md-6"> <p> </p></div>#}
+        <div class="container">
+            {#            <div class="col-md-12">#}
+            {% if offers %}
+                {#                <ul>#}
+                    <div class="container bill">
+                        <table class="employeeTable">
+                            <tr>
+                            <th>Offer No.</th>
+                            <th>Offer Name</th>
+                            <th>Offer Service 1</th>
+                            <th>Offer Service 2</th>
+                            <th>Offer Service 3</th>
+                            <th>Price</th>
+
+                            </tr>
+                        {% for offer in offers %}
+                            <tr>
+                                <td>{{ offer.id }}</td>
+                                <td>{{ offer.offerName }}</td>
+                                <td>{{ offer.service1 }}</td>
+                                <td>{{ offer.service2 }}</td>
+                                <td>{{ offer.service3 }}</td>
+                                <td>{{ offer.price }}</td>
+                                <td><a href="{{ path("chooseOffer", {id: offer.id}) }}"><button class="btn btn-primary">Choose offer</button></a> </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                <a href="{{ path("addOffer") }}"><button class="btn btn-primary">Add Offer</button></a>
+                <div class="row" style="margin-top: 3%">
+                <h3>Forecast</h3><br>
+
+                </div>
+                <div class="row">
+                    You should advertise more: {{ promote.offerName }}
+                </div>
+                {#                </ul>#}
+            {% else %}
+                <h4>No offer to show! <a href="{{ path("addOffer") }}"><button class="btn btn-primary">Add Offer</button></a> </h4>
+            {% endif %} <br><br>
+
+            {#                </div>#}
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
