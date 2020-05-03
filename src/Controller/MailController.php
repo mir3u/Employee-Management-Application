@@ -31,14 +31,16 @@ class MailController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $mail = $form->getData();
 
+            $body = "You have a new order that will be brought to you to the address " . $mail[ 'address' ] . " with the contents of " . $mail[ 'content' ] . '. The AWB is: ' . $mail[ 'awb' ] . '.';
+
             $message = (new \Swift_Message('Hello!'))
                 ->setFrom('ana.bratucu@gmail.com')
                 ->setTo($mail[ 'receiver' ])
-                ->setBody($mail[ 'content' ],'text/plain');
+                ->setBody($body,'text/plain');
 
             $mailer->send($message);
-            $entityManager->persist($mail);
-            $entityManager->flush();
+            //$entityManager->persist($mail);
+           // $entityManager->flush();
 
         }
         return $this->render('newMail.html.twig', array('form'=>$form->createView()));
