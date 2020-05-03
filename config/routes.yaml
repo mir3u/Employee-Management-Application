@@ -106,7 +106,9 @@ editCustomers:
 deleteCustomers:
   path: /customer/delete{id}
   controller: App\Controller\CustomerController:deleteCustomer
-
+newEmail:
+  path: /newEmail
+  controller: App\Controller\EmailController:newEmail
 
 addAttendees:
   path: /meeting/new/attendees/{meetingId}/
