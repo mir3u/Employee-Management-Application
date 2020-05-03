@@ -1,7 +1,18 @@
 .nav{
-    padding-bottom: 10px;
-    margin: 5px;
+    /*padding-bottom: 10px;*/
+    margin: 0.5%;
 
+}
+.navbar{
+    background-color: #ffccce !important;
+    height: 2%;
+    min-height:56px!important;
+
+}
+
+.form-align{
+    padding-left: 20%;
+    padding-right: 20%;
 }
 #banner{
     padding-top: 10px;
@@ -86,4 +97,11 @@ var {
 .billTable{
     table-layout: fixed;
     width: 100%;
+}
+
+.card-deck{
+    width: 80%;
+    padding: 2%;
+    margin-right: 10%;
+    margin-left: 10%;
 }

@@ -19,12 +19,12 @@ class AttendeesMeeting{
     private $id;
 
      /**
-      * @ORM\OneToMany(targetEntity="App\Entity\Employee", mappedBy="id")
+      * @ORM\ManyToOne(targetEntity="App\Entity\Employee")
       */
-    private $attendees = [];
+    private $attendees;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Meeting", mappedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Meeting")
      */
     private $meeting;
 

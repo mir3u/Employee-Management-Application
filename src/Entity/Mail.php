@@ -18,18 +18,22 @@ class Mail
      * @ORM\Column(type="integer")
      */
     private $id;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $receiverName;
 
     /**
      * @ORM\Column(type="string")
      */
-    private $receiver;
+    private $receiverEmail;
 
     /**
-     * @ORM\Column(type="$string")
+     * @ORM\Column(type="string")
      */
     private $content;
     /**
-     * @ORM\Column(type="$string")
+     * @ORM\Column(type="string")
      */
     private $address;
 
@@ -39,7 +43,7 @@ class Mail
     private $awb;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $user;
 
@@ -59,21 +63,6 @@ class Mail
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getReceiver()
-    {
-        return $this->receiver;
-    }
-
-    /**
-     * @param mixed $receiver
-     */
-    public function setReceiver($receiver): void
-    {
-        $this->receiver = $receiver;
-    }
 
     /**
      * @return mixed
@@ -138,5 +127,39 @@ class Mail
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReceiverName()
+    {
+        return $this->receiverName;
+    }
+
+    /**
+     * @param mixed $receiverName
+     */
+    public function setReceiverName($receiverName): void
+    {
+        $this->receiverName = $receiverName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getReceiverEmail()
+    {
+        return $this->receiverEmail;
+    }
+
+    /**
+     * @param mixed $receiverEmail
+     */
+    public function setReceiverEmail($receiverEmail): void
+    {
+        $this->receiverEmail = $receiverEmail;
+    }
+
+
 
 }

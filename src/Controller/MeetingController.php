@@ -41,6 +41,7 @@ class MeetingController extends AbstractController
             ->findBy(['user' => $company]);
 
         $form = $this->createFormBuilder($meeting)
+            ->add('name', TextType::class)
             ->add('start',
                 DateTimeType::class, array('attr' => array( 'required' => true)))
             ->add('location', TextType::class)
@@ -118,12 +119,12 @@ class MeetingController extends AbstractController
             ->getRepository(Employee::class)
             ->findBy(['user' => $company]);
 
-
         /** @var Employee[] $participantsAll */
         $participantsAll = $this->checkAvailability($participants, $meeting->getStart());
 
 //        die(var_dump($participantsAll));
         $attendees = new AttendeesMeeting();
+        $attendees->setMeeting($meeting);
 
         $form = $this->createFormBuilder($attendees)
 
@@ -146,10 +147,19 @@ class MeetingController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var  AttendeesMeeting $meeting */
             $meetingAt = $form->getData();
+
             $entityManager = $this->getDoctrine()->getManager();
-//            $bill->setPayment(0);
-            $entityManager->persist($meetingAt);
-            $entityManager->flush();
+
+            if ($meetingAt->getAttendees()) {
+                foreach ($meetingAt->getAttendees() as $attend) {
+
+                    $attends = new AttendeesMeeting();
+                    $attends->setMeeting($meetingAt->getMeeting());
+                    $attends->setAttendees($attend);
+                    $entityManager->persist($attends);
+                    $entityManager->flush();
+                }
+            }
 
             return $this->redirectToRoute('listMeeting',['meetingId' => $meeting->getId()]);
         }
@@ -169,12 +179,195 @@ class MeetingController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        $meetings =  $this->getDoctrine()
+        $meetings =[];
+        $meetingDB =  $this->getDoctrine()
             ->getRepository(Meeting::class)
-            ->findOneBy(['id' => $companyName]);
+            ->findBy(['user' => $company]);
 
-        return $this->render('listMeeting.html.twig', ['bills' => $meetings]);
+        $count = 0;
+//        die(var_dump($meetingDB));
+        if($meetingDB) {
+            foreach ($meetingDB as $meeting) {
+                /** @var AttendeesMeeting $attendance */
+                $attendance = $this->getDoctrine()
+                    ->getRepository(AttendeesMeeting::class)
+                    ->findBy(['meeting' => $meeting]);
+                $participants = [];
+                foreach ($attendance as $att) {
+                    $employee = $this->getDoctrine()
+                        ->getRepository(Employee::class)
+                        ->findOneBy(['id' => $att->getAttendees()]);
+                    $participants[] = $employee->getFirstName().$employee->getLastName();
+                }
+                $meetings[$count]['attendees'] = $participants;
+                $meetings[$count]['details'] = $meeting;
+                $count++;
+            }
+        }
+        return $this->render('listMeeting.html.twig', ['meetings' => $meetings]);
 
+    }
+
+    public function editMeeting(Request $request, $id){
+        $session = $request->getSession();
+        $companyName = $session->get('user');
+
+        $company = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['username' => $companyName]);
+        if ($session->get('user') === null) {
+            return $this->redirectToRoute('login');
+        }
+        $meeting = $this->getDoctrine()
+            ->getRepository(Meeting::class)
+            ->findOneBy(['id' => $id]);
+        $em = $this->getDoctrine()->getManager();
+        $participantsAll  = $this->getDoctrine()
+            ->getRepository(Employee::class)
+            ->findBy(['user' => $company]);
+
+        $form = $this->createFormBuilder($meeting)
+            ->add('name', TextType::class)
+            ->add('start',
+                DateTimeType::class, array('attr' => array( 'required' => true)))
+            ->add('location', TextType::class)
+            ->add('hall', TextType::class)
+            ->add('equipment', TextType::class)
+            ->add('save', SubmitType::class, ['label' => 'Save'])
+            ->getForm();
+        ;
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var  Meeting $meeting */
+            $meeting = $form->getData();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($meeting);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('editAttendees',['meetingId' => $meeting->getId()]);
+        }
+        return $this->render('newMeeting.html.twig', array('form'=>$form->createView()));
+
+
+    }
+
+    public function editAttendees(Request $request, $meetingId){
+        $session = $request->getSession();
+        $companyName = $session->get('user');
+
+        $company = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['username' => $companyName]);
+        if ($session->get('user') === null) {
+            return $this->redirectToRoute('login');
+        }
+        $meeting =  $this->getDoctrine()
+            ->getRepository(Meeting::class)
+            ->findOneBy(['id' => $meetingId]);
+
+        $participants  = $this->getDoctrine()
+            ->getRepository(Employee::class)
+            ->findBy(['user' => $company]);
+
+        $participantsOldDB  = $this->getDoctrine()
+            ->getRepository(AttendeesMeeting::class)
+            ->findBy(['meeting' => $meeting]);
+        $participantsOld = [];
+        foreach ($participantsOldDB as $att) {
+            $employee = $this->getDoctrine()
+                ->getRepository(Employee::class)
+                ->findOneBy(['id' => $att->getAttendees()]);
+            $participantsOld[] = $employee->getId();
+        }
+
+        /** @var Employee[] $participantsAll */
+        $participantsAll = $this->checkAvailability($participants, $meeting->getStart());
+
+        $attendees = new AttendeesMeeting();
+        $attendees->setMeeting($meeting);
+
+        $form = $this->createFormBuilder($attendees)
+
+            ->add('attendees', ChoiceType::class, [
+                'choices' => $participantsAll,
+                'choice_label' => function ($participant) {
+                    return $participant->getFirstName().' '.$participant->getLastName();},
+                'required' => false,
+                'expanded' => true,
+                'multiple' => true
+            ])
+            ->add('save', SubmitType::class, ['label' => 'Save'])
+            ->getForm();
+
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /** @var  AttendeesMeeting $meeting */
+            $meetingAt = $form->getData();
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $idsMew = [];
+            if ($meetingAt->getAttendees()) {
+                foreach ($meetingAt->getAttendees() as $attend) {
+                    $idsMew[] = $attend->getId();
+                    if(!in_array($attend->getId(), $participantsOld)){
+                        $attends = new AttendeesMeeting();
+                        $attends->setMeeting($meetingAt->getMeeting());
+                        $attends->setAttendees($attend);
+                        $entityManager->persist($attends);
+                        $entityManager->flush();
+                    }
+                }
+                foreach ($participantsOld as $old){
+                    if(!in_array($old, $idsMew)){
+                        $em = $this->getDoctrine()->getManager();
+                        $attend  = $this->getDoctrine()
+                            ->getRepository(AttendeesMeeting::class)
+                            ->findOneBy(['attendees' => $old]);
+                        $em->remove($attend);
+                        $em->flush();
+                    }
+                }
+            }
+            if(!$idsMew){
+                foreach ($participantsOld as $old){
+                        $em = $this->getDoctrine()->getManager();
+                        $attend  = $this->getDoctrine()
+                            ->getRepository(AttendeesMeeting::class)
+                            ->findOneBy(['attendees' => $old]);
+                        $em->remove($attend);
+                        $em->flush();
+                }
+            }
+
+
+            return $this->redirectToRoute('listMeeting',['meetingId' => $meeting->getId()]);
+        }
+        return $this->render('newAttendees.html.twig', array('form'=>$form->createView()));
+
+    }
+
+    public function deleteMeeting(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $meeting  = $em
+            ->getRepository(Meeting::class)
+            ->findOneBy(['id' => $id]);
+        $participantsDB  = $this->getDoctrine()
+            ->getRepository(AttendeesMeeting::class)
+            ->findBy(['meeting' => $meeting]);
+        if($participantsDB) {
+            foreach ($participantsDB as $participant) {
+                $em->remove($participant);
+                $em->flush();
+            }
+        }
+        $em->remove($meeting);
+        $em->flush();
+
+        return $this->redirectToRoute('listMeeting');
     }
 
 }

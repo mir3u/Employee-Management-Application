@@ -27,6 +27,11 @@ class Meeting
     /**
      * @ORM\Column(type="string")
      */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     private $location;
 
     /**
@@ -40,7 +45,7 @@ class Meeting
     private $equipment;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $user;
 
@@ -160,6 +165,23 @@ class Meeting
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
 
 
 
