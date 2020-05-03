@@ -1,11 +1,11 @@
 
 swiftmailer:
     url: '%env(MAILER_URL)%'
+    host: localhost
+    port:             465
+    encryption: ssl
+    auth-mode: login
     spool: { type: 'memory' }
-
-
-
-
 
 
 
