@@ -163,4 +163,8 @@ chooseOffer:
   path: /offers/choose{id}
   controller: App\Controller\OfferController:chooseOffer
 
+newExcel:
+  path: /excel/new/
+  controller: App\Controller\ExcelController:newExcel
+
 
