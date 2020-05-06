@@ -93,3 +93,18 @@ newEmail:
   path: /newEmail
   controller: App\Controller\EmailController:newEmail
 
+addService:
+  path: /service/add/
+  controller: App\Controller\ServiceController:add
+
+listServices:
+  path: /service/list/
+  controller: App\Controller\ServiceController:listServices
+
+editServices:
+  path: /service/edit/{id}
+  controller: App\Controller\ServiceController:editService
+
+deleteServices:
+  path: /service/delete{id}
+  controller: App\Controller\ServiceController:deleteService

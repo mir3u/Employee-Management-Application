@@ -1,0 +1,74 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p></p>
+
+    <div class="container-fluid">
+        <div class="container">
+            {% if services %}
+            <table class="table">
+                <tr>
+                    <th>service details</th>
+                    <th>Email</th>
+                    <th>Phone number</th>
+                    <th>Location</th>
+                    <th>Due date</th>
+                    <th>Feedback</th>
+                    <th>XX</th>
+                    <th>XX</th>
+                </tr>
+                {% for service in services %}
+                    <div>
+                        <tr scope="row">
+                            <td scope="col">{{ service.type }}</td>
+                            <td scope="col">{{ service.currency }}</td>
+                            <td scope="col">{{ service.details }}</td>
+                            <td scope="col">{{ service.startDate |date('Y-m-d') }}</td>
+                            <td scope="col">{{ service.endDate |date('Y-m-d') }}</td>
+                            <td scope="col">{{ service.price }}</td>
+                            <td scope="col"><a href="{{ path("editServices", {id: service.id}) }}">
+                                    <button class="btn btn-primary">Edit</button>
+                                </a></td>
+                            <td><a href="{{ path("deleteServices", {id: service.id}) }}">
+                                    <button class="btn btn-danger">Delete</button>
+                                </a></td>
+                        </tr>
+                    </div>
+                {% endfor %}
+                <br>
+                <tr><a href="{{ path("addService") }}">
+                        <button class="btn btn-primary">Save service</button>
+                    </a></tr>
+                <br>
+            </table>
+        </div>
+
+        {#                </ul>#}
+
+        {% else %}
+            <h4>No services to show! <a href="{{ path("addService") }}">
+                    <button class="btn btn-primary">Add service</button>
+                </a></h4>
+        {% endif %}
+        {#                </div>#}
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+    <script>
+        $(document).ready(function() {
+            var searchText=$(this).val().toLowerCase();
+            $.each($('#table tbody tr'),function() {
+                if($(this).text().toLowerCase().indexOf(searchText)=== -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            });
+        });
+    </script>
+{% endblock %}
