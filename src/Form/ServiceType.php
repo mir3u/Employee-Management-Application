@@ -20,7 +20,7 @@ class ServiceType extends AbstractType {
             ->add('startDate',DateType::class,['label'=>'Start Date'])
             ->add('endDate',DateType::class,['label'=>'End  Date'])
             ->add('price',TextType::class,['label'=>'Price'])
-            ->add('save',SubmitType::class,['label'=>'Add service'])
+            ->add('save',SubmitType::class,['label'=>'Save service'])
             ->getForm();
     }
 
