@@ -16,16 +16,24 @@
                 {% for mailOne in mail %}
                     <div class="container bill">
                         <table class="billTable">
-                            <th>Receiver</th>
+                            <th>Receiver Name</th>
+                            <th>Receiver Email</th>
                             <th>Address</th>
                             <th>Content</th>
                             <th>AWB</th>
                             <tr>
-                                <td>{{ mailOne.receiver }}</td>
+                                <td>{{ mailOne.receiverName }}</td>
+                                <td>{{ mailOne.receiverEmail }}</td>
                                 <td style="margin: 10%;">{{ mailOne.address }} </td>
                                 <td>{{ mailOne.content }}</td>
                                 <td>{{ mailOne.awb }}</td>
 
+
+                                {% if mailOne.sendStatus == 0 %}
+                                    <td><a href="{{ path("sendMail", {id: mailOne.id}) }}"><button class="btn btn-warning">Send Mail</button></a></td>
+                                {% else %}
+                                    <td> Sent! </td>
+                                {% endif %}
 
                                 <td><a href="{{ path("editMail", {id: mailOne.id}) }}"><button class="btn btn-primary">Edit Mail</button></a> </td>
 

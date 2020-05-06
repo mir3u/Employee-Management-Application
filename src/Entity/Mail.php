@@ -46,6 +46,10 @@ class Mail
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $user;
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $sendStatus = 0;
 
     /**
      * @return mixed
@@ -160,6 +164,19 @@ class Mail
         $this->receiverEmail = $receiverEmail;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSendStatus()
+    {
+        return $this->sendStatus;
+    }
 
-
+    /**
+     * @param mixed $sendStatus
+     */
+    public function setSendStatus($sendStatus): void
+    {
+        $this->sendStatus = $sendStatus;
+    }
 }

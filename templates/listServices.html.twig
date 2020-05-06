@@ -11,14 +11,14 @@
             {% if services %}
             <table class="table">
                 <tr>
-                    <th>service details</th>
+                    <th>Service Details</th>
                     <th>Email</th>
-                    <th>Phone number</th>
+                    <th>Phone Number</th>
                     <th>Location</th>
                     <th>Due date</th>
-                    <th>Feedback</th>
-                    <th>XX</th>
-                    <th>XX</th>
+                    <th>Price</th>
+                    <th></th>
+                    <th></th>
                 </tr>
                 {% for service in services %}
                     <div>
@@ -38,12 +38,10 @@
                         </tr>
                     </div>
                 {% endfor %}
-                <br>
-                <tr><a href="{{ path("addService") }}">
-                        <button class="btn btn-primary">New service</button>
-                    </a></tr>
-                <br>
             </table>
+            <a href="{{ path("addService") }}">
+                    <button class="btn btn-primary">New service</button>
+                </a>
         </div>
 
         {#                </ul>#}
