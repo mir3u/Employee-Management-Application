@@ -36,6 +36,7 @@ editBill:
 deleteBill:
   path: /bill/delete/{id}
   controller: App\Controller\BillController:deleteBill
+
 payBill:
   path: /bill/pay/{id}
   controller: App\Controller\BillController:payBill
@@ -74,7 +75,6 @@ deleteEmployees:
   path: /employee/delete/{id}
   controller: App\Controller\EmployeeController:deleteEmployee
 
-
 addCompany:
   path: /company/add/
   controller: App\Controller\CompanyController:add
@@ -90,7 +90,6 @@ editCompanies:
 deleteCompanies:
   path: /company/delete{id}
   controller: App\Controller\CompanyController:deleteCompany
-
 addCustomer:
   path: /customer/add/
   controller: App\Controller\CustomerController:add
@@ -159,3 +158,18 @@ chooseOffer:
   path: /offers/choose{id}
   controller: App\Controller\OfferController:chooseOffer
 
+addService:
+  path: /service/add/
+  controller: App\Controller\ServiceController:add
+
+listServices:
+  path: /service/list/
+  controller: App\Controller\ServiceController:listServices
+
+editServices:
+  path: /service/edit/{id}
+  controller: App\Controller\ServiceController:editService
+
+deleteServices:
+  path: /service/delete{id}
+  controller: App\Controller\ServiceController:deleteService
