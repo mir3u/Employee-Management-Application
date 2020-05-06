@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 class MailController extends AbstractController
 {
 
-    public function addMail(Request $request,\Swift_Mailer $mailer){
+    public function addMail(Request $request){
         //$mail = new Mail();
         $session = $request->getSession();
         $companyName = $session->get('user');
@@ -33,7 +33,7 @@ class MailController extends AbstractController
             ->add('address', TextType::class, ['label' => 'Address'])
             ->add('content', TextType::class, ['label' => 'Content'])
             ->add('awb', TextType::class, ['label' => 'Awb'])
-            ->add('save', SubmitType::class, ['label' => 'Send Mail'])
+            ->add('save', SubmitType::class, ['label' => 'Add Mail'])
             ->getForm();
 
         $form->handleRequest($request);
@@ -42,25 +42,13 @@ class MailController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $mail = $form->getData();
 
-
             try {
-                $transport = new \Swift_SmtpTransport('imap.gmail.com', 993);
-
-                $mailer = new \Swift_Mailer($transport);
-                $message = (new \Swift_Message('Hello!'))
-                    ->setFrom('ana.bratucu@gmail.com')
-                    ->setTo($mail->getReceiverEmail())
-                    ->setBody($mail->getContent(), 'text/plain');
-
-                $mailer->send($message);
+                $mail->setUser($company);
+                $entityManager->persist($mail);
+                $entityManager->flush();
             }catch (\Swift_TransportException $e){
-                echo $e;
+//                echo $e;
             }
-
-
-            $mail->setUser($company);
-            $entityManager->persist($mail);
-            $entityManager->flush();
 
             return $this->redirectToRoute("listMail");
         }
@@ -78,7 +66,7 @@ class MailController extends AbstractController
             return $this->redirectToRoute('login');
         }
 
-        /** @var Mail[] $bills */
+        /** @var Mail[] $mail */
         $mail = $this->getDoctrine()
             ->getRepository(Mail::class)
             ->findBy(['user' => $company]);
@@ -88,17 +76,16 @@ class MailController extends AbstractController
 
     public function editMail(Request $request, $id){
         $mail  = $this->getDoctrine()
-            ->getRepository(Bill::class)
+            ->getRepository(Mail::class)
             ->findOneBy(['id' => $id]);
 
         $form = $this->createFormBuilder($mail)
             ->add('receiverName', TextType::class, ['label' => 'Receiver Name'])
             ->add('receiverEmail', TextType::class, ['label' => 'Receiver Email'])
-            ->add('receiver', TextType::class, ['label' => 'Receiver'])
             ->add('address', TextType::class, ['label' => 'Address'])
             ->add('content', TextType::class, ['label' => 'Content'])
             ->add('awb', TextType::class, ['label' => 'Awb'])
-            ->add('save', SubmitType::class, ['label' => 'Send Mail'])
+            ->add('save', SubmitType::class, ['label' => 'Add Mail'])
             ->getForm();
 
         $form->handleRequest($request);
@@ -109,7 +96,7 @@ class MailController extends AbstractController
             $entityManager->persist($mail);
             $entityManager->flush();
 
-            return $this->redirectToRoute('listBills');
+            return $this->redirectToRoute('listMail');
         }
         return $this->render('newMail.html.twig', array('form'=>$form->createView()));
 
@@ -124,5 +111,31 @@ class MailController extends AbstractController
         $em->flush();
 
         return $this->redirectToRoute('listMail');
+    }
+
+    public function sendMail(Request $request, $id, \Swift_Mailer $mailer){
+        $em = $this->getDoctrine()->getManager();
+
+        /** @var Mail $mail */
+        $mail  = $this->getDoctrine()
+            ->getRepository(Mail::class)
+            ->findOneBy(['id' => $id]);
+
+        $body = "You have a new order that will be brought to you to the address " . $mail->getAddress() . " with the contents of " . $mail->getContent(). '. The AWB is: ' . $mail->getAwb() . '.';
+
+        $message = (new \Swift_Message('Hello!'))
+            ->setFrom('mirunaalexandra97@gmail.com')
+            ->setTo($mail->getReceiverEmail())
+            ->setBody($body,'text/plain');
+
+
+       $mailer->send($message);
+
+        $mail->setSendStatus(1);
+        $em->persist($mail);
+        $em->flush();
+
+        return $this->redirectToRoute('listMail');
+
     }
 }

@@ -66,7 +66,9 @@ class PdfController extends AbstractController
              "Attachment" => true
          ]);
         // Send some text response
-        return new Response("The PDF file has been successfully generated !");
+        //return new Response("The PDF file has been successfully generated !");
+
+        exit;
 
     }
 }

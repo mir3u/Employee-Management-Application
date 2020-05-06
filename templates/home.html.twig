@@ -19,7 +19,7 @@
             <img class="card-img-top" src="{{ asset('img/emp.jpg') }}" alt="Employees" style="height:180px;">
             <div class="card-body">
             <h5 class="card-title">Employees</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">Managing employees is the most challenging part of a manager’s day-to-day responsibilities.</p>
             <a href="/employee/list" class="btn btn-primary">Manage employees</a>
             </div>
         </div>
@@ -29,7 +29,7 @@
             <img class="card-img-top" src="{{ asset('img/bill.jpg') }}" alt="Bills" style="height:180px;">
             <div class="card-body">
             <h5 class="card-title">Bills</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text">The payment section for the services offered. A customer choose to pay the bills for utility services.</p>
             <a href="/bill/list" class="btn btn-primary">Manage bills</a>
             </div>
         </div>
@@ -37,7 +37,7 @@
             <img class="card-img-top" src="{{ asset('img/compa.jpg') }}" alt="Companies" style="height:180px;">
             <div class="card-body">
             <h5 class="card-title">Companies</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <p class="card-text">Manage the companies that sells services in order achive a specific objective.</p>
             <a href="/company/list" class="btn btn-primary">Manage companies</a>
             </div>
         </div>
@@ -48,7 +48,7 @@
             <img class="card-img-top" src="{{ asset('img/cust.jpg') }}" alt="Customers" style="height:180px;">
             <div class="card-body">
             <h5 class="card-title">Customers</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">The customer is the foundation of any business' success. Putting the customer first, in simple terms, means that a business puts the needs and requirements of a customer ahead of anything. </p>
             <a href="/customer/list" class="btn btn-primary">Manage customers</a>
             </div>
         </div>
@@ -56,7 +56,7 @@
             <img class="card-img-top" src="{{ asset('img/mail.jpg') }}" alt="Mailing" style="height:180px;">
             <div class="card-body">
             <h5 class="card-title">Mailing</h5>
-            <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+            <p class="card-text">Partnering with an efficient online postal service improves your company's image. Using email can greatly benefit businesses as it provides efficient and effective ways to transmit all kinds of electronic data.</p>
             <a href="/mail/list" class="btn btn-primary">Send mail</a>
             </div>
         </div>
@@ -64,18 +64,18 @@
             <img class="card-img-top" src="{{ asset('img/pdf.jpg') }}" alt="Profit" style="height:180px;">
             <div class="card-body">
             <h5 class="card-title">Clients' profit report</h5>
-            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            <a href="{{ path("newPdf") }}" class="btn btn-primary">Export</a>
+            <p class="card-text">Generate reports as Portable Document Format, which has the big advantage of compressing high-quality files to a relatively small file size.</p>
+            <a href="{{ path("newPdf") }}" class="btn btn-primary">Export PDF</a>
             </div>
         </div>
     </div>
 
     <div class="card-deck" style="margin-top:50px;">
-        <div class="card"  style="margin-left:100px;">
-            <img class="card-img-top" src="{{ asset('img/cust.jpg') }}" alt="Offers" style="height:180px;">
+        <div class="card" style="margin-left:100px;">
+            <img class="card-img-top" src="{{ asset('img/offer.jpg') }}" alt="Offers" style="height:180px;">
             <div class="card-body">
             <h5 class="card-title">Offers</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text">The reputation of a business can also be improved by catching the attention of customers through offers. The services being visible at each offer.</p>
             <a href="/offers/list" class="btn btn-primary">Manage offers</a>
             </div>
         </div>
@@ -83,7 +83,7 @@
             <img class="card-img-top" src="{{ asset('img/cust.jpg') }}" alt="Offers" style="height:180px;">
             <div class="card-body">
                 <h5 class="card-title">Meeting</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                <p class="card-text">Meetings are one of the most controversial topics in the workplace. Some people hate them, while others believe they are necessary for successful teams to work together.</p>
                 <a href="/meeting/list" class="btn btn-primary">Manage meeting</a>
             </div>
         </div>
@@ -91,8 +91,19 @@
             <img class="card-img-top"  src="{{ asset('img/mail.jpg') }}" alt="Mailing" style="height:180px;">
             <div class="card-body">
                 <h5 class="card-title">Marketing mails</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+                <p class="card-text">Email marketing can allow you to create targeted and personalised messages. This can help you to build meaningful relationships with your customers.</p>
                 <a href="/new" class="btn btn-primary"> Send marketing email</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck" style="margin-top:50px;width:470px;">
+        <div class="card" style="margin-left:100px;">
+            <img class="card-img-top" src="{{ asset('img/excel.jpg') }}" alt="Excel" style="height:180px;">
+            <div class="card-body">
+            <h5 class="card-title">Clients' report Excel</h5>
+            <p class="card-text">Microsoft Excel allows you to manipulate, manage and analyze data in any business. Microsoft Excel gives you the right tools to enable you to accomplish all your needs.</p>
+            <a href="{{ path("newExcel") }}" class="btn btn-primary">Export Excel</a>
             </div>
         </div>
     </div>
