@@ -1,0 +1,62 @@
+{% extends "base1.html.twig" %}
+
+
+
+{% block body %}
+    <br><br><br>
+    <p>  </p>
+
+    <div class="container-fluid">
+
+        {#        <div class="col-md-6"> <p> </p></div>#}
+        <div class="container">
+            {#            <div class="col-md-12">#}
+            {% if mail %}
+                {#                <ul>#}
+                {% for mailOne in mail %}
+                    <div class="container bill">
+                        <table class="billTable">
+                            <th>Receiver</th>
+                            <th>Address</th>
+                            <th>Content</th>
+                            <th>AWB</th>
+                            <tr>
+                                <td>{{ mailOne.receiver }}</td>
+                                <td style="margin: 10%;">{{ mailOne.address }} </td>
+                                <td>{{ mailOne.content }}</td>
+                                <td>{{ mailOne.awb }}</td>
+
+
+                                <td><a href="{{ path("editMail", {id: mailOne.id}) }}"><button class="btn btn-primary">Edit Mail</button></a> </td>
+
+                                <td><a href="{{ path("deleteMail", {id: mailOne.id}) }}"><button class="btn btn-danger">Delete Mail</button></a></td>
+                            </tr>
+                        </table>
+                    </div>
+                {% endfor %}
+                {#                </ul>#}
+                <a href="{{ path("addMail") }}"><button class="btn btn-primary">Add Mail</button></a>
+            {% else %}
+                <h4>You have no mail! <a href="{{ path("addMail") }}"><button class="btn btn-primary">New Mail</button></a> </h4>
+            {% endif %}
+            {#                </div>#}
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+{% block footer %}
+
+    <script>
+        $(document).ready(function(){
+            var searchText = $(this).val().toLowerCase();
+            $.each($("#table tbody tr"), function() {
+                if($(this).text().toLowerCase().indexOf(searchText) === -1){
+                    $(this).hide();
+                } else {
+                    $(this) . show();
+                }
+            });
+        });
+    </script>
+{% endblock %}

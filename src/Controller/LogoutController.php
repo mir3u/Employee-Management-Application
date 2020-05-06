@@ -12,7 +12,7 @@ class LogoutController extends AbstractController
     public function main(){
         $session = new Session();
         $session->clear('user');
-        return $this->render('home.html.twig');
+        return $this->render('logout.html.twig');
     }
 
 }

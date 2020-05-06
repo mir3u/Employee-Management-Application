@@ -36,7 +36,7 @@ class Bill
     private $payment;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="id")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      */
     private $user;
 

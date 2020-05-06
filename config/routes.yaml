@@ -13,12 +13,14 @@ register:
 login:
   path: /login/
   controller: App\Controller\LoginController::login
+logout:
+  path: /logout/
+  controller: App\Controller\LogoutController:main
 errorPage:
   path: /error/
   controller: App\Controller\ErrorPageController:main
-newMeeting:
-  path: /meeting/new/
-  controller: App\Controller\MeetingControler:createMeeting
+
+
 newBill:
   path: /bill/new/
   controller: App\Controller\BillController:newBill
@@ -39,9 +41,23 @@ payBill:
   path: /bill/pay/{id}
   controller: App\Controller\BillController:payBill
 
-logout:
-  path: /logout/
-  controller: App\Controller\LogoutController:main
+
+newMeeting:
+  path: /meeting/new/
+  controller: App\Controller\MeetingController:createMeeting
+listMeeting:
+  path: /meeting/list
+  controller: App\Controller\MeetingController:listMeeting
+editMeeting:
+  path: /meeting/edit/{id}
+  controller: App\Controller\MeetingController:editMeeting
+deleteMeeting:
+  path: /meeting/delete/{id}
+  controller: App\Controller\MeetingController:deleteMeeting
+
+
+
+
 
 addEmployee:
   path: /employee/add/
@@ -92,6 +108,55 @@ deleteCustomers:
 newEmail:
   path: /newEmail
   controller: App\Controller\EmailController:newEmail
+
+addAttendees:
+  path: /meeting/new/attendees/{meetingId}/
+  controller: App\Controller\MeetingController:addAttendees
+editAttendees:
+  path: /meeting/edit/attendees/{meetingId}/
+  controller: App\Controller\MeetingController:editAttendees
+
+
+addMail:
+  path: /mail/add/
+  controller: App\Controller\MailController:addMail
+
+listMail:
+  path: /mail/list
+  controller: App\Controller\MailController:listMail
+
+editMail:
+  path: /mail/edit/{id}
+  controller: App\Controller\MailController:editMail
+
+deleteMail:
+  path: /mail/delete/{id}
+  controller: App\Controller\MailController:deleteMail
+
+newPdf:
+  path: /pdf/new/
+  controller: App\Controller\PdfController:newPdf
+
+addOffer:
+  path: /offers/add/
+  controller: App\Controller\OfferController:add
+
+
+listOffers:
+  path: /offers/list/
+  controller: App\Controller\OfferController:listOffers
+
+editOffer:
+  path: /offers/edit/{id}
+  controller: App\Controller\OfferController:editOffer
+
+deleteOffer:
+  path: /offers/delete{id}
+  controller: App\Controller\OfferController:deleteOffer
+
+chooseOffer:
+  path: /offers/choose{id}
+  controller: App\Controller\OfferController:chooseOffer
 
 addService:
   path: /service/add/
