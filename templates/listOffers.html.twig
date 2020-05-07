@@ -1,6 +1,17 @@
 {% extends "base1.html.twig" %}
 
-
+{% block javascripts %}
+    <script>
+        $(document).ready(function() {
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+{% endblock %}
 
 {% block body %}
     <br><br><br>
@@ -10,11 +21,13 @@
 
         {#        <div class="col-md-6"> <p> </p></div>#}
         <div class="container">
-            {#            <div class="col-md-12">#}
             {% if offers %}
+            <input style="margin-left:2%; " class="form-control" id="myInput" type="text" placeholder="Search...">
+            {#            <div class="col-md-12">#}
+
                 {#                <ul>#}
                     <div class="container bill">
-                        <table class="employeeTable">
+                        <table id="myTable" class="employeeTable">
                             <tr>
                             <th>Offer No.</th>
                             <th>Offer Name</th>

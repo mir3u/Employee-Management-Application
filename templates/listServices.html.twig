@@ -1,6 +1,17 @@
 {% extends "base1.html.twig" %}
 
-
+{% block javascripts %}
+<script>
+    $(document).ready(function() {
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
+{% endblock %}
 
 {% block body %}
     <br><br><br>
@@ -9,13 +20,15 @@
     <div class="container-fluid">
         <div class="container">
             {% if services %}
-            <table class="table">
+            <input class="form-control" id="myInput" type="text" placeholder="Search...">
+
+            <table id="myTable" class="table">
                 <tr>
-                    <th>Service Details</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Location</th>
-                    <th>Due date</th>
+                    <th>Service Name</th>
+                    <th>Service Type</th>
+                    <th>Details</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
                     <th>Price</th>
                     <th></th>
                     <th></th>
@@ -23,6 +36,7 @@
                 {% for service in services %}
                     <div>
                         <tr scope="row">
+                            <td>{{ service.name }}</td>
                             <td scope="col">{{ service.type }}</td>
                             <td scope="col">{{ service.currency }}</td>
                             <td scope="col">{{ service.details }}</td>
@@ -55,18 +69,3 @@
     </div>
 {% endblock %}
 
-{% block footer %}
-
-    <script>
-        $(document).ready(function() {
-            var searchText=$(this).val().toLowerCase();
-            $.each($('#table tbody tr'),function() {
-                if($(this).text().toLowerCase().indexOf(searchText)=== -1) {
-                    $(this).hide();
-                } else {
-                    $(this).show();
-                }
-            });
-        });
-    </script>
-{% endblock %}
