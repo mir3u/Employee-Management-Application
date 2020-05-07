@@ -29,7 +29,8 @@
             <img class="card-img-top" src="{{ asset('img/bill.jpg') }}" alt="Bills" style="height:180px;">
             <div class="card-body">
             <h5 class="card-title">Bills</h5>
-            <p class="card-text">The payment section for the services offered. A customer choose to pay the bills for utility services.</p>
+            <p class="card-text">The payment section for the services offered. A customer choose to pay the bills for utility services.
+                {% if dueBills %}<p style="color: #ff3c29">You have bills that are due payment!</p>{% endif %} </p>
             <a href="/bill/list" class="btn btn-primary">Manage bills</a>
             </div>
         </div>
@@ -52,19 +53,19 @@
             </div>
         </div>
         <div class="card">
-            <img class="card-img-top" src="{{ asset('img/mail.jpg') }}" alt="Mailing" style="height:180px;">
+            <img class="card-img-top" src="{{ asset('img/cust.jpg') }}" alt="Excel" style="height:180px;">
             <div class="card-body">
-            <h5 class="card-title">Mailing</h5>
-            <p class="card-text">Partnering with an efficient online postal service improves your company's image. Using email can greatly benefit businesses as it provides efficient and effective ways to transmit all kinds of electronic data.</p>
-            <a href="/mail/list" class="btn btn-primary">Send mail</a>
+                <h5 class="card-title">Service</h5>
+                <p class="card-text">With a service you can showcase your company's work.</p>
+                <a href="/service/list" class="btn btn-primary">Manage Services</a>
             </div>
         </div>
-        <div class="card" style="margin-right:100px;">
-            <img class="card-img-top" src="{{ asset('img/pdf.jpg') }}" alt="Profit" style="height:180px;">
+        <div class="card"  style="margin-right:100px;">
+            <img class="card-img-top"  src="{{ asset('img/mail.jpg') }}" alt="Mailing" style="height:180px;">
             <div class="card-body">
-            <h5 class="card-title">Clients' profit report</h5>
-            <p class="card-text">Generate reports as Portable Document Format, which has the big advantage of compressing high-quality files to a relatively small file size.</p>
-            <a href="{{ path("newPdf") }}" class="btn btn-primary">Export PDF</a>
+                <h5 class="card-title">Marketing mails</h5>
+                <p class="card-text">Email marketing can allow you to create targeted and personalised messages. This can help you to build meaningful relationships with your customers.</p>
+                <a href="/new" class="btn btn-primary"> Send marketing email</a>
             </div>
         </div>
     </div>
@@ -78,7 +79,15 @@
             <a href="/offers/list" class="btn btn-primary">Manage offers</a>
             </div>
         </div>
-        <div class="card" >
+        <div class="card">
+            <img class="card-img-top" src="{{ asset('img/mail.jpg') }}" alt="Mailing" style="height:180px;">
+            <div class="card-body">
+                <h5 class="card-title">Mailing</h5>
+                <p class="card-text">Partnering with an efficient online postal service improves your company's image. Using email can greatly benefit businesses as it provides efficient and effective ways to transmit all kinds of electronic data.</p>
+                <a href="/mail/list" class="btn btn-primary">Send mail</a>
+            </div>
+        </div>
+        <div class="card" style="margin-right:100px;" >
             <img class="card-img-top" src="{{ asset('img/cust.jpg') }}" alt="Offers" style="height:180px;">
             <div class="card-body">
                 <h5 class="card-title">Meeting</h5>
@@ -86,14 +95,7 @@
                 <a href="/meeting/list" class="btn btn-primary">Manage meeting</a>
             </div>
         </div>
-        <div class="card"  style="margin-right:100px;">
-            <img class="card-img-top"  src="{{ asset('img/mail.jpg') }}" alt="Mailing" style="height:180px;">
-            <div class="card-body">
-                <h5 class="card-title">Marketing mails</h5>
-                <p class="card-text">Email marketing can allow you to create targeted and personalised messages. This can help you to build meaningful relationships with your customers.</p>
-                <a href="/new" class="btn btn-primary"> Send marketing email</a>
-            </div>
-        </div>
+
     </div>
 
     <div class="card-deck" style="margin-top:50px; ">
@@ -106,12 +108,12 @@
             </div>
         </div>
 
-        <div class="card">
-            <img class="card-img-top" src="{{ asset('img/cust.jpg') }}" alt="Excel" style="height:180px;">
+        <div class="card" >
+            <img class="card-img-top" src="{{ asset('img/pdf.jpg') }}" alt="Profit" style="height:180px;">
             <div class="card-body">
-                <h5 class="card-title">Adding a new service</h5>
-                <p class="card-text">You can add a service.</p>
-                <a href="/service/list" class="btn btn-primary">Manage Services</a>
+                <h5 class="card-title">Clients' profit report</h5>
+                <p class="card-text">Generate reports as Portable Document Format, which has the big advantage of compressing high-quality files to a relatively small file size.</p>
+                <a href="{{ path("newPdf") }}" class="btn btn-primary">Export PDF</a>
             </div>
         </div>
         <div class="card" style="margin-right:100px;visibility: hidden;">

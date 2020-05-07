@@ -18,21 +18,30 @@
                             <tr>
                             <th>Offer No.</th>
                             <th>Offer Name</th>
-                            <th>Offer Service 1</th>
-                            <th>Offer Service 2</th>
-                            <th>Offer Service 3</th>
+                            <th>Offer Service </th>
+{#                            <th>Offer Service 2</th>#}
+                            <th>Offer Chosen Times</th>
                             <th>Price</th>
 
                             </tr>
                         {% for offer in offers %}
+{#                            {{ offer.services }}#}
                             <tr>
                                 <td>{{ offer.id }}</td>
                                 <td>{{ offer.offerName }}</td>
-                                <td>{{ offer.service1 }}</td>
-                                <td>{{ offer.service2 }}</td>
-                                <td>{{ offer.service3 }}</td>
+{#                                <td>#}
+{#                            {{ dump(offer.services) }}#}
+{#                                {% for service in offer.services %}#}
+
+                                <td>{{ offer.service.name }}</td>
+{#                            {% endfor %}#}
+{#                                 </td>#}
+{#                                <td>{{ offer.service2 }}</td>#}
+                                <td>{{ offer.chosen }}</td>
                                 <td>{{ offer.price }}</td>
-                                <td><a href="{{ path("chooseOffer", {id: offer.id}) }}"><button class="btn btn-primary">Choose offer</button></a> </td>
+                                <td><a href="{{ path("chooseOffer", {id: offer.id}) }}"><button class="btn btn-warning">Choose offer</button></a> </td>
+                                <td><a href="{{ path("editOffer", {id: offer.id}) }}"><button class="btn btn-primary">Edit offer</button></a> </td>
+                                <td><a href="{{ path("deleteOffer", {id: offer.id}) }}"><button class="btn btn-danger">Delete offer</button></a> </td>
                             </tr>
                         {% endfor %}
                         </table>

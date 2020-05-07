@@ -26,6 +26,7 @@ class ServiceController extends AbstractController {
     public function add(Request $request) {
         $add=new Service();
         $form=$this->createFormBuilder($add)
+            ->add('name', TextType::class,['label'=>'Name',])
             ->add('type',TextType::class,['label'=>'Type',])
             ->add('currency',TextType::class,['label'=>'Currency'])
             ->add('details',TextType::class,['label'=>'Details',])

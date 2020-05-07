@@ -5,8 +5,11 @@ namespace App\Controller;
 
 
 use App\Entity\Offer;
+use App\Entity\Service;
+use App\Entity\User;
 use App\Form\OfferType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,12 +20,33 @@ class OfferController
     public function add(Request $request)
     {
         $add = new Offer();
+        $session = $request->getSession();
+        $companyName = $session->get('user');
+
+        $company = $this->getDoctrine()
+            ->getRepository(User::class)
+            ->findOneBy(['username' => $companyName]);
+        if ($session->get('user') === null) {
+            return $this->redirectToRoute('login');
+        }
+        $servicies = $this->getDoctrine()
+            ->getRepository(Service::class)
+            ->findAll();
+
+        $add->setService($servicies);
 
         $form = $this->createFormBuilder($add)
             ->add('offerName', TextType::class, ['label' => 'Offer Name' ,'required' => true])
-            ->add('service1', TextType::class, ['label' => 'Service 1','required' => true])
-            ->add('service2', TextType::class, ['label' => 'Service 2','required' => false])
-            ->add('service3', TextType::class, ['label' => 'Service 3','required' => false])
+            ->add('service', ChoiceType::class, [
+                'choices' => $servicies,
+                'choice_label' => function ($service) {
+                    return $service->getName();},
+                'required' => false,
+                'expanded' => true,
+                'multiple' => false
+            ])
+//            ->add('service2', TextType::class, ['label' => 'Service 2','required' => false])
+//            ->add('service3', TextType::class, ['label' => 'Service 3','required' => false])
             ->add('price', TextType::class, ['label' => 'Price','required' => true])
             ->add('save', SubmitType::class, ['label' => 'Add Offer'])
             ->getForm();
@@ -32,10 +56,11 @@ class OfferController
 
             $add = $form->getData();
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->persist($add);
-                $entityManager->flush();
-                return $this->redirectToRoute('listOffers');
+            $add->setService($add->getService()->getName());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($add);
+            $entityManager->flush();
+            return $this->redirectToRoute('listOffers');
         }
 
 
@@ -51,6 +76,14 @@ class OfferController
             ->getRepository(Offer::class)
             ->findAll();
 
+//        $offers = [];
+        /** @var Offer $offer */
+//        foreach ($offersDB as $offer){
+//            $offers[]["offers"] = $offer;
+//            $offers[array_key_last($offers)]["service"]=$offer->getServices()->getValues();
+//            die(var_dump($offers));
+//        }
+
         $promote = $this->getDoctrine()
             ->getRepository(Offer::class)
             ->findOneBy(array(),array('chosen' => 'ASC'));
@@ -64,7 +97,26 @@ class OfferController
             ->getRepository(Offer::class)
             ->findOneBy(['id' => $id]);
 
-        $form =  $form = $this->createForm(OfferType::class, $offer);
+
+        $servicies = $this->getDoctrine()
+            ->getRepository(Service::class)
+            ->findAll();
+
+        $form = $this->createFormBuilder($offer)
+            ->add('offerName', TextType::class, ['label' => 'Offer Name' ,'required' => true])
+            ->add('service', ChoiceType::class, [
+                'choices' => $servicies,
+                'choice_label' => function ($service) {
+                    return $service->getName();},
+                'required' => false,
+                'expanded' => true,
+                'multiple' => false
+            ])
+//            ->add('service2', TextType::class, ['label' => 'Service 2','required' => false])
+//            ->add('service3', TextType::class, ['label' => 'Service 3','required' => false])
+            ->add('price', TextType::class, ['label' => 'Price','required' => true])
+            ->add('save', SubmitType::class, ['label' => 'Add Offer'])
+            ->getForm();
 
         $form->handleRequest($request);
 

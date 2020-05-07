@@ -16,6 +16,12 @@ class Service
      */
     private $id;
 
+
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $name;
+
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
@@ -37,6 +43,7 @@ class Service
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $endDate;
+
 
     /**
      * @ORM\Column(type="integer", nullable=true)
@@ -123,4 +130,26 @@ class Service
 
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param mixed $name
+     */
+    public function setName($name): void
+    {
+        $this->name = $name;
+    }
+
+
+
+
+
+
 }
